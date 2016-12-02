@@ -50,7 +50,11 @@
   var currentPlayer = 1
   var score = 0
 
-  $('body').off('mousedown', playShootingFX)
+  $('body').off('mousedown', function(){
+    playShootingFX()
+    $(".container").css("background-color","white")
+    $('body')setTimeout.css("background-color","lightblue"), 100)
+  )
 
 //RANDOM NUMBER/POSITION GENERATOR
   function genRandomNum(min, max){

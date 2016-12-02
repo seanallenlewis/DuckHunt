@@ -21,7 +21,7 @@
       <div id="player1Score">0</div>
       </div>
     <div id="timeSlot">TIME:
-      <div id="timer">3</div>
+      <div id="timer">00</div>
     </div>
     <div class="score score2">PLAYER 2:
       <div id="player2Score">0</div>
@@ -32,16 +32,40 @@
       <div id='welcome'>
         <img id='welcomeImg'src="./images/welcome.jpg" alt="" />
         <h2 id=welcomeText>Click Here To Begin</h2>
+      </div>  
+      <div id='alertBox'>
+        <h2 id='alertLine1'></h2>
+        <h2 id='alertLine2'></h2>
       </div>
 <!-- GRASS -->
       <div id="grass"><img src="./images/grass.png" alt="" /></div>
   </div>
 
-
+<!-- SOUNDS -->
+  <audio id="shotgun" src="audio/shotgun.mp3"></audio>
 
 <script>
+
   var currentPlayer = 1
-  var score = 0
+  var p1Score = 0
+  var p2Score = 0
+  var continueCode = "x"
+
+  $('#alertBox').hide()
+
+// //CLICK TO SHOOT FX
+//   $('body').off('mousedown', function(){
+//     playShootingFX()
+//     $(".container").css("background-color","white")
+//     $('body').setTimeout.css("background-color","lightblue"), 100)
+//   )
+// //SHOTGUN SOUND
+//   $shotgun[0].shoot = function(){
+//     this.pause()
+//     this.currentTime = 0
+//     this.play()
+//   }
+
 
 //RANDOM NUMBER/POSITION GENERATOR
   function genRandomNum(min, max){
@@ -75,17 +99,16 @@ $('body').on('mousedown', '.duck', function(){
     createDuck()
   })
   trackScore();
-
 })
-
 
 //TRACK SCORE
 function trackScore(){
-  score = score + 1
-  if (currentPlayer = 1) {
-    $("#player1Score").text(score)
-  } else if (currentPlayer = 2){
-    $("#player2Score").text(score)
+  if (currentPlayer == 1) {
+    p1Score = p1Score + 1
+    $("#player1Score").text(p1Score)
+  } else if (currentPlayer == 2){
+    p2Score = p2Score + 1
+    $("#player2Score").text(p2Score)
   }
 
 }
@@ -108,47 +131,83 @@ function duckAnimation() {
 //WELCOME SCREEN
 //initial game screen to start the game
 $('#welcome').on('click', function(){
+  console.log("begin")
   $(this).remove()
+
   $('#PlayerCountdown').show()
   startTimer()
 })
 
+//FUNCTION GOROUTE
+//traffic signal to guide into proper functions
+function goRoute(){
+  console.log("what to do")
+  if (continueCode == "x"){
+    startTimer()
+  } else if (continueCode == "y"){
+    switchPlayers()
+  } else if (continueCode == "z"){
+    stop()
+  }
+}
 
-//GAME TIMER
-var $timerNumber = $('#timer').text()
+//CLOCK FUNCTION
+//starts main timer and initialiazes start of turn
+function startTimer(){
+  console.log("launch timer")
+  $('#timer').text('20')
+  createDuck()
+  createDuck()
+  createDuck()
+  gameTimer = setInterval(goTimer, 1000);
+}
 function goTimer(){
+  console.log("start counting")
+  var $timerNumber = $('#timer').text()
+  if (currentPlayer == 1){
+    $(".score1").css("background-color","yellow")
+    $(".score2").css("background-color","white")
+  } else if (currentPlayer == 2) {
+    $(".score1").css("background-color","white")
+    $(".score2").css("background-color","yellow")
+  }
   if ($timerNumber > 10) {
       $timerNumber = $timerNumber - 1
       $('#timer').text($timerNumber)
   } else if ($timerNumber > 0) {
       $timerNumber = $timerNumber - 1
       $('#timer').text("0" + $timerNumber)
-  } else {
-      // currentPlayer = 2;
-      // score = 0;
-      
+  } else if ($timerNumber == 0) {
       $('.duck').remove()
-      // $('#readyCount').text("3")
-      $("#hPlayer").text("READY PLAYER 2")
-      // $('#PlayerCountdown').show()
-      // startCountdown()
-      clearInterval(duckTimer)
-      startTimer()
-      // $timerNumber = 59
-      return
+      clearInterval(gameTimer)
+      if (continueCode == "x"){
+        continueCode = "y"
+        goRoute()
+      } else if (continueCode == "y"){
+        continueCode = "z"
+        goRoute()
+
+        return
+      }
   }
 }
 
-function startTimer(){
-
-  // $('#timer').text('59')
-  createDuck()
-  createDuck()
-  createDuck()
-  duckTimer = setInterval(goTimer, 1000);
+//SWITCH PLAYERS FUNCTION
+function switchPlayers(){
+  //player 2 notification
+  console.log("switch Players")
+  currentPlayer = 2
+  startTimer()
 }
 
+//STOP FUNCTION
+function stop(){
+  currentPlayer = 0
+  $(".score2").css("background-color","white")
+  console.log("stop")
+  $('.duck').remove()
 
+}
 
 
 </script>

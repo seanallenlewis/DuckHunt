@@ -1,6 +1,7 @@
-
+  html{
+    cursor:url("../images/crosshairs.png"), auto;
+  }
   body{
-    cursor: crosshair;
     font-family: 'Press Start 2P', cursive;
     background-color: lightblue;
   }
@@ -31,6 +32,7 @@
   }
   .score1{
     float: left;
+
   }
   #player1Score{
     display: block;
@@ -66,15 +68,19 @@
     width: 120px;
   }
   #container {
+    cursor:url("../images/crosshairs.png"), auto;
     width: 100%;
     height: 100%;
     background-color: lightblue;
     position: relative;
+
   }
   div {
     position: absolute;
   }
   #welcome{
+    margin: 12%;
+    margin-left: 3%;
     color: white;
     display: block;
     top: 20%;
@@ -94,7 +100,9 @@
     left: 20px;
     width: 100%;
   }
-  .alertBox{
+  #alertBox{
+    margin: 12%;
+    margin-left: 3%;
     text-align: center;
     padding: 20px;
     color: white;

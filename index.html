@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+
+    <title>Duck Hunt</title>
+  </head>
+  <body>
+
+<!-- SCORE BOARD -->
+  <div id="upperBar">
+    <div class="score score1">PLAYER 1:
+      <div id="player1Score">0</div>
+      </div>
+    <div id="timeSlot">TIME:
+      <div id="timer">3</div>
+    </div>
+    <div class="score score2">PLAYER 2:
+      <div id="player2Score">0</div>
+    </div>
+  </div>
+<!--PLAYING FIELD -->
+  <div id="container">
+      <div id='welcome'>
+        <img id='welcomeImg'src="./images/welcome.jpg" alt="" />
+        <h2 id=welcomeText>Click Here To Begin</h2>
+      </div>
+<!-- PLAYER COUNTDOWN -->
+      <div id='PlayerCountdown'>
+        <h2 id="hPlayer"> READY PLAYER 1 </h2>
+        <h2 id='readyCount'>3</h2>
+      </div>
+<!-- GRASS -->
+      <div id="grass"><img src="./images/grass.png" alt="" /></div>
+  </div>
+
+<!-- SOUNDS -->
+  <audio id="shotgun" src="audio/shotgun.mp3"></audio>
+
+<script>
+  var $shotgun = $('#shotgun')
+  var currentPlayer = 1
+  var score = 0
+
+  $('body').off('mousedown', playShootingFX)
+
+//RANDOM NUMBER/POSITION GENERATOR
+  function genRandomNum(min, max){
+    return (Math.round(Math.random() * (max - min)) + min)
+  }
+  function randomTop() {
+    return genRandomNum(5, ($(window).height() - 100))
+  }
+  function randomLeft() {
+    return genRandomNum(5, ($(window).width() - 50))
+  }
+  x = randomTop();
+  y = randomLeft();
+  var currentDuck = 0;
+  $('#PlayerCountdown').hide()
+
+//CREATE A DUCK
+//create a div with duck image within the field of play and animate
+function createDuck(){
+  $('#container').append('<div class="duck"><img src="./images/DuckUpWingR.png" alt="" /></div>')
+  $('.duck').last().animate({ top: x, left: y }, 600, duckAnimation);
+}
+
+//DEAD DUCK
+//change img of duck when clicked, animate to drop, increase score
+$('body').on('mousedown', '.duck', function(){
+  $(this).stop()
+  $(this).html('<img src="./images/deadduck.png" alt="" />')
+  $(this).animate({top: 650 }, 500, function() {
+    $(this).remove()
+    createDuck()
+  })
+  trackScore();
+
+})
+
+//SHOTGUN SOUND
+$shotgun[0].shoot = function(){
+  this.pause()
+  this.currentTime = 0
+  this.play()
+}
+
+//SHOTGUN SOUND
+function playShootingFX() {
+  $shotgun[0].shoot()
+}
+$('body').on('mousedown', playShootingFX)
+
+//ERASE DUCK
+function clearDuck(){
+
+};
+
+//COUNTDOWN TIMER
+
+function countDown(){
+  var $count = $('#readyCount').text()
+  if ($count > 1) {
+      $count = ($count - 1);
+      $('#readyCount').text(""+$count+"")
+  } else {
+    clearTimeout(1);
+    $count = "GO!!!";
+    $('#readyCount').text(""+$count+"")
+    setTimeout(function(){
+      $('#PlayerCountdown').fadeOut(function(){
+        createDuck()
+        createDuck()
+        createDuck()
+        startTimer()
+      })
+    }, 1000)
+  }
+
+}
+function startCountdown() {
+setInterval(countDown, 1000);
+}
+
+//TRACK SCORE
+function trackScore(){
+  score = score + 1
+  if (currentPlayer = 1) {
+    $("#player1Score").text(score)
+  } else if (currentPlayer = 2){
+    $("#player2Score").text(score)
+  }
+
+}
+
+// DUCK ANIMATION
+// a function to animate the direction of the duck based off current position
+function duckAnimation() {
+  newTop = randomTop();
+  newLeft = randomLeft();
+    if (newLeft >= y) {
+      $(this).html('<img src="./images/DuckUpWingR.png" alt="" />')
+    } else if (newLeft < y){
+      $(this).html('<img src="./images/DuckUpWingL.png" alt="" />')
+    }
+  x = randomTop();
+  y = randomLeft();
+  $(this).animate({ top: x, left: y }, 1000, duckAnimation);
+}
+
+//WELCOME SCREEN
+//initial game screen to start the game
+$('#welcome').on('click', function(){
+  $(this).remove()
+  $('#PlayerCountdown').show()
+  startCountdown()
+})
+
+
+// comments
+      /*  function duckAnimation() {
+
+          currentLeft = $(this).css('left')
+          startingPoint = Number(currentLeft.substring(0, (currentLeft.length - 2)));
+          endingPoint = genRandomNum(100, 400)
+            if(endingPoint - startingPoint > 0) {
+              $(currentDuck).html('<img src="./images/DuckUpWingR.png" alt="" />')
+            } else if(endingPoint - startingPoint < 0) {
+              $(currentDuck).html('<img src="./images/DuckUpWingL.png" alt="" />')
+            }
+
+          $(currentDuck).animate({
+            left: endingPoint,
+            top: genRandomNum(10, 500)
+          }) }
+
+*/
+
+
+//GAME TIMER
+var $timerNumber = $('#timer').text()
+
+function goTimer(){
+  if ($timerNumber > 10) {
+      $timerNumber = $timerNumber - 1
+      $('#timer').text($timerNumber)
+  } else if ($timerNumber > 0) {
+      $timerNumber = $timerNumber - 1
+      $('#timer').text("0" + $timerNumber)
+  } else {
+      // currentPlayer = 2;
+      // score = 0;
+      $('.duck').remove()
+      // $('#readyCount').text("3")
+      $("#hPlayer").text("READY PLAYER 2")
+      // $('#PlayerCountdown').show()
+      // startCountdown()
+
+      // $timerNumber = 59
+      return
+  }
+}
+
+function startTimer(){
+  // $('#timer').text('59')
+  duckTimer = setInterval(goTimer, 1000);
+}
+
+
+
+
+</script>
+
+
+
+  </body>
+</html>

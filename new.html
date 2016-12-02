@@ -32,13 +32,14 @@
       <div id='welcome'>
         <img id='welcomeImg'src="./images/welcome.jpg" alt="" />
         <h2 id=welcomeText>Click Here To Begin</h2>
-      </div>  
+      </div>
       <div id='alertBox'>
         <h2 id='alertLine1'></h2>
         <h2 id='alertLine2'></h2>
       </div>
 <!-- GRASS -->
-      <div id="grass"><img src="./images/grass.png" alt="" /></div>
+      <div class="grass" id="grassUpper"><img src="./images/grassUpper.png" alt="" /></div>
+      <div class="grass" id="grassLower"><img src="./images/grassLower.png" alt="" /></div>
   </div>
 
 <!-- SOUNDS -->
@@ -135,7 +136,7 @@ $('#welcome').on('click', function(){
   $(this).remove()
 
   $('#PlayerCountdown').show()
-  startTimer()
+  playerReadyWindow()
 })
 
 //FUNCTION GOROUTE
@@ -164,13 +165,6 @@ function startTimer(){
 function goTimer(){
   console.log("start counting")
   var $timerNumber = $('#timer').text()
-  if (currentPlayer == 1){
-    $(".score1").css("background-color","yellow")
-    $(".score2").css("background-color","white")
-  } else if (currentPlayer == 2) {
-    $(".score1").css("background-color","white")
-    $(".score2").css("background-color","yellow")
-  }
   if ($timerNumber > 10) {
       $timerNumber = $timerNumber - 1
       $('#timer').text($timerNumber)
@@ -197,7 +191,7 @@ function switchPlayers(){
   //player 2 notification
   console.log("switch Players")
   currentPlayer = 2
-  startTimer()
+  playerReadyWindow()
 }
 
 //STOP FUNCTION
@@ -208,6 +202,53 @@ function stop(){
   $('.duck').remove()
 
 }
+
+//PLAYER READY WINDOW FUNCTION
+//prompts player to ready and sets score window color
+function playerReadyWindow(){
+  //greeting for current player
+  if (currentPlayer == 1) {
+    $('#alertLine1').text(" PLAYER 1, READY?")
+    $(".score1").css("background-color","yellow")
+    $(".score2").css("background-color","white")
+  } else if (currentPlayer == 2) {
+    $('#alertLine1').text(" PLAYER 2, READY?")
+    $(".score1").css("background-color","white")
+    $(".score2").css("background-color","yellow")
+  }
+  //set initial countdown time to 3
+  $("#alertLine2").text("3")
+
+  var countDownAlert = setInterval(function(){
+    var $count = $('#alertLine2').text()
+    if ($count > 1) {
+        $count = ($count - 1);
+        $('#alertLine2').text(""+$count+"")
+    } else {
+      $count = "GO!!!";
+      $('#alertLine2').text(""+$count+"")
+      clearInterval(countDownAlert)
+    }
+  } , 1000)
+
+
+
+
+
+
+  //show alertbox and wait 4 seconds then hide it
+  $('#alertBox').show()
+  setTimeout(function(){
+    $('#alertBox').hide()
+    startTimer()
+    }, 4000)
+    }
+
+// wait 3 seconds, then alert "Hello".
+// myFunction()
+// function myFunction() {
+//     setTimeout(function(){ alert("Hello"); }, 3000);
+
 
 
 </script>

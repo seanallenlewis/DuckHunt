@@ -37,6 +37,10 @@
         <h2 id='alertLine1'></h2>
         <h2 id='alertLine2'></h2>
       </div>
+      <div id='resetBox'>
+        <h2>WANT TO PLAY AGAIN?</h2>
+        <button id="resetButton">RESET</button>
+      </div>
 <!-- GRASS -->
       <div class="grass" id="grassUpper"><img src="./images/grassUpper.png" alt="" /></div>
       <div class="grass" id="grassLower"><img src="./images/grassLower.png" alt="" /></div>
@@ -46,27 +50,33 @@
   <audio id="shotgun" src="audio/shotgun.mp3"></audio>
 
 <script>
-
+  var $shotgun = $('#shotgun')
   var currentPlayer = 1
   var p1Score = 0
   var p2Score = 0
   var continueCode = "x"
 
+  $('html').off('mousedown', playShootingFX)
   $('#alertBox').hide()
+  $('#resetBox').hide()
 
-// //CLICK TO SHOOT FX
-//   $('body').off('mousedown', function(){
-//     playShootingFX()
-//     $(".container").css("background-color","white")
-//     $('body').setTimeout.css("background-color","lightblue"), 100)
-//   )
-// //SHOTGUN SOUND
-//   $shotgun[0].shoot = function(){
-//     this.pause()
-//     this.currentTime = 0
-//     this.play()
-//   }
+//CLICK TO SHOOT FX
+    // $(".container").css("background-color","white")
+    // $('body').setTimeout.css("background-color","lightblue"), 100)
 
+  //SHOTGUN SOUND
+  $shotgun[0].shoot = function(){
+    this.pause()
+    this.currentTime = 0
+    this.play()
+  }
+
+  //SHOTGUN SOUND
+  function playShootingFX() {
+    $shotgun[0].shoot()
+  }
+
+  $('html').off('mousedown', playShootingFX)
 
 //RANDOM NUMBER/POSITION GENERATOR
   function genRandomNum(min, max){
@@ -134,8 +144,6 @@ function duckAnimation() {
 $('#welcome').on('click', function(){
   console.log("begin")
   $(this).remove()
-
-  $('#PlayerCountdown').show()
   playerReadyWindow()
 })
 
@@ -156,10 +164,11 @@ function goRoute(){
 //starts main timer and initialiazes start of turn
 function startTimer(){
   console.log("launch timer")
-  $('#timer').text('20')
+  $('#timer').text('3')
   createDuck()
   createDuck()
   createDuck()
+  $('html').on('mousedown', playShootingFX)
   gameTimer = setInterval(goTimer, 1000);
 }
 function goTimer(){
@@ -173,6 +182,7 @@ function goTimer(){
       $('#timer').text("0" + $timerNumber)
   } else if ($timerNumber == 0) {
       $('.duck').remove()
+      $('html').off('mousedown', playShootingFX)
       clearInterval(gameTimer)
       if (continueCode == "x"){
         continueCode = "y"
@@ -189,6 +199,7 @@ function goTimer(){
 //SWITCH PLAYERS FUNCTION
 function switchPlayers(){
   //player 2 notification
+  $('.duck').remove()
   console.log("switch Players")
   currentPlayer = 2
   playerReadyWindow()
@@ -200,7 +211,7 @@ function stop(){
   $(".score2").css("background-color","white")
   console.log("stop")
   $('.duck').remove()
-
+  WinnerMessage()
 }
 
 //PLAYER READY WINDOW FUNCTION
@@ -208,17 +219,17 @@ function stop(){
 function playerReadyWindow(){
   //greeting for current player
   if (currentPlayer == 1) {
-    $('#alertLine1').text(" PLAYER 1, READY?")
+    $('#alertLine1').text(" PLAYER 1, READY? ")
     $(".score1").css("background-color","yellow")
     $(".score2").css("background-color","white")
   } else if (currentPlayer == 2) {
-    $('#alertLine1').text(" PLAYER 2, READY?")
+    $('#alertLine1').text(" PLAYER 2, READY? ")
     $(".score1").css("background-color","white")
     $(".score2").css("background-color","yellow")
   }
   //set initial countdown time to 3
   $("#alertLine2").text("3")
-
+  //1 sec interval to countdown from 3 to "go!!!"
   var countDownAlert = setInterval(function(){
     var $count = $('#alertLine2').text()
     if ($count > 1) {
@@ -230,12 +241,6 @@ function playerReadyWindow(){
       clearInterval(countDownAlert)
     }
   } , 1000)
-
-
-
-
-
-
   //show alertbox and wait 4 seconds then hide it
   $('#alertBox').show()
   setTimeout(function(){
@@ -244,12 +249,41 @@ function playerReadyWindow(){
     }, 4000)
     }
 
-// wait 3 seconds, then alert "Hello".
-// myFunction()
-// function myFunction() {
-//     setTimeout(function(){ alert("Hello"); }, 3000);
+// WINNER MESSAGE
+function WinnerMessage(){
+  console.log("winner message")
+  if (p1Score > p2Score) {
+    $('#alertLine1').text("    PLAYER 1    ")
+    $('#alertLine2').text("    WINS!!!!    ")
+  } else if (p1Score < p2Score) {
+    $('#alertLine1').text("    PLAYER 2    ")
+    $('#alertLine2').text("    WINS!!!!    ")
+  } else if (p1Score == p2Score) {
+    $('#alertLine1').text("    A TIE!!!    ")
+    $('#alertLine2').text("   TRY  AGAIN   ")
+  }
+  $('#alertBox').show()
+  setTimeout(function(){
+    $('#alertBox').hide()
+    castResetBox()
+  }, 5000)
+}
 
+//RESET BUTTON
+function castResetBox(){
+  $('#resetBox').show()
+  $("button").mouseup(function(){
+      currentPlayer = 1
+      p1Score = 0
+      p2Score = 0
+      continueCode = "x"
+    $('#alertBox').hide()
+    $('#resetBox').hide()
+    playerReadyWindow()
 
+  })
+
+}
 
 </script>
 

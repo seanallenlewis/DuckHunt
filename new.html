@@ -59,9 +59,10 @@
   $('html').off('mousedown', playShootingFX)
   $('#alertBox').hide()
   $('#resetBox').hide()
-
+  $('.duck img').on('dragstart', function(event) { event.preventDefault(); });
+  
 //CLICK TO SHOOT FX
-    // $(".container").css("background-color","white")
+    // $("body").css("background-color","white")
     // $('body').setTimeout.css("background-color","lightblue"), 100)
 
   //SHOTGUN SOUND
@@ -72,22 +73,22 @@
   }
 
   //SHOTGUN SOUND
-  function playShootingFX() {
+  function playShootingFX(){
     $shotgun[0].shoot()
+    $("body").css("background-color","white")
+    setTimeout(function() { $('body').css("background-color","lightblue"), 100 })
   }
-
-  $('html').off('mousedown', playShootingFX)
 
 //RANDOM NUMBER/POSITION GENERATOR
   function genRandomNum(min, max){
     return (Math.round(Math.random() * (max - min)) + min)
   }
-  function randomTop() {
-    return genRandomNum(5, ($(window).height() - 100))
-  }
-  function randomLeft() {
-    return genRandomNum(5, ($(window).width() - 50))
-  }
+    function randomTop() {
+      return genRandomNum(5, ($(window).height() - 100))
+    }
+    function randomLeft() {
+      return genRandomNum(5, ($(window).width() - 50))
+    }
 
 //CREATE A DUCK
 //create a div with duck image within the field of play and animate
@@ -150,23 +151,24 @@ function goRoute(){
   if (continueCode == "x"){
     startTimer()
   } else if (continueCode == "y"){
-    switchPlayers()
+    evaluator()
   } else if (continueCode == "z"){
-    stop()
+    evaluator()
   }
 }
 
-//CLOCK FUNCTION
+//START CLOCK FUNCTION
 //starts main timer and initialiazes start of turn
 function startTimer(){
   console.log("launch timer")
-  $('#timer').text('3')
+  $('#timer').text('10')
   createDuck()
   createDuck()
   createDuck()
   $('html').on('mousedown', playShootingFX)
   gameTimer = setInterval(goTimer, 1000);}
 
+//CLOCK FUNCTION
 function goTimer(){
   console.log("start counting")
   var $timerNumber = $('#timer').text()
@@ -278,6 +280,90 @@ function castResetBox(){
     playerReadyWindow()
   })
 }
+
+
+//EVALUATOR
+function evaluator(){
+  var evalScore = 0
+    $('#alertLine1').text(" ROUND OVER ")
+    if (currentPlayer == 1){
+      evalScore = p1Score
+    } else if (currentPlayer == 2){
+      evalScore = p2Score
+    }
+    if (evalScore == 0){
+    $('#alertLine2').text("Are You There? Hello?")
+    }else if (evalScore == 1){
+    $('#alertLine2').text("Have A Participation Trophy")
+    } else if (evalScore == 2){
+    $('#alertLine2').text("Nice Job Stevie Wonder")
+    }else if (evalScore == 3){
+    $('#alertLine2').text("... Storm Trooper?")
+    }else if (evalScore == 4){
+    $('#alertLine2').text("Practice Makes ...Average ...Eventually")
+    }else if (evalScore == 5){
+    $('#alertLine2').text("Don't Feel Bad. The Ducks Aren't Real")
+    }else if (evalScore == 6){
+    $('#alertLine2').text("Major Mallard Murderer!")
+    }else if (evalScore == 7){
+    $('#alertLine2').text("Nice Shooting Tex!")
+    }else if (evalScore == 8){
+    $('#alertLine2').text("Wild Bill Would Be Proud")
+    }else if (evalScore == 9){
+    $('#alertLine2').text("Good Stuff Anne Oakley")
+    }else if (evalScore == 10){
+    $('#alertLine2').text("Nice Job Dirty Harry")
+    }else if (evalScore == 11){
+    $('#alertLine2').text("Excellent Performance!!!")
+    }else if (evalScore == 12){
+    $('#alertLine2').text("Certified Bad Ass!")
+    }else if (evalScore == 13){
+    $('#alertLine2').text("Chief Duck Killer")
+    }else if (evalScore == 14){
+    $('#alertLine2').text("King Duck Killer")
+    }else if (evalScore == 15){
+    $('#alertLine2').text("We're You In Seal Team 6?")
+    }else if (evalScore == 16){
+    $('#alertLine2').text("Certified Marksman")
+    }else if (evalScore == 17){
+    $('#alertLine2').text("Gold Level Marksman")
+    }else if (evalScore == 18){
+    $('#alertLine2').text("Platinum Level Marksman")
+    }else if (evalScore == 19){
+    $('#alertLine2').text("Master Level Sharpshooter")
+    }else if (evalScore == 20){
+    $('#alertLine2').text("Legendary Master Level Sharpshooter")
+    }else if (evalScore == 21){
+    $('#alertLine2').text("God Tier Level")
+    }else if (evalScore == 22){
+    $('#alertLine2').text("God Tier Level 2")
+    }else if (evalScore == 23){
+    $('#alertLine2').text("God Tier Level 3")
+    }else if (evalScore == 24){
+    $('#alertLine2').text("God Tier Level 4")
+    }else if (evalScore == 25){
+    $('#alertLine2').text("God Tier Level 5")
+    }else if (evalScore == 26){
+    $('#alertLine2').text("Double God Tier Level Gold")
+    }else if (evalScore == 27){
+    $('#alertLine2').text("Triple Tier Level Platinum")
+    }else if (evalScore == 28){
+    $('#alertLine2').text("Quadruple God Tier Level Diamond")
+    }else if (evalScore == 29){
+    $('#alertLine2').text("Ultra Ultimate God Tier Level")
+    }else if (evalScore >= 30){
+    $('#alertLine2').text("Infinite God Tier! You Could Make Millions in E-Sports")
+    }
+     $('#alertBox').show()
+     setTimeout(function(){
+       $('#alertBox').hide()
+          if (continueCode == "y"){
+            switchPlayers()
+          }else if (continueCode =="z"){
+            stop()
+          }
+      }, 5000)
+    }
 
 </script>
 

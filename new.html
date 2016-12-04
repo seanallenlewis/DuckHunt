@@ -88,17 +88,27 @@
   function randomLeft() {
     return genRandomNum(5, ($(window).width() - 50))
   }
-  x = randomTop();
-  y = randomLeft();
-  var currentDuck = 0;
-
 
 //CREATE A DUCK
 //create a div with duck image within the field of play and animate
 function createDuck(){
+  var x = randomTop();
+  var y = randomLeft();
   $('#container').append('<div class="duck"><img src="./images/DuckUpWingR.png" alt="" /></div>')
-  $('.duck').last().animate({ top: x, left: y }, 600, duckAnimation);
-}
+  $('.duck').last().animate({ top: x, left: y }, 600, function duckAnimation() {
+    newTop = randomTop();
+    newLeft = randomLeft();
+      if (newLeft >= y) {
+        $(this).html('<img src="./images/DuckUpWingR.png" alt="" />')
+      } else if (newLeft < y){
+        $(this).html('<img src="./images/DuckUpWingL.png" alt="" />')
+      }
+    x = newTop
+    y = newLeft
+    $(this).animate({ top: x, left: y }, 1000, duckAnimation);
+  })
+  }
+
 
 //DEAD DUCK
 //change img of duck when clicked, animate to drop, increase score
@@ -124,24 +134,10 @@ function trackScore(){
 
 }
 
-// DUCK ANIMATION
-// a function to animate the direction of the duck based off current position
-function duckAnimation() {
-  newTop = randomTop();
-  newLeft = randomLeft();
-    if (newLeft >= y) {
-      $(this).html('<img src="./images/DuckUpWingR.png" alt="" />')
-    } else if (newLeft < y){
-      $(this).html('<img src="./images/DuckUpWingL.png" alt="" />')
-    }
-  x = randomTop();
-  y = randomLeft();
-  $(this).animate({ top: x, left: y }, 1000, duckAnimation);
-}
-
 //WELCOME SCREEN
 //initial game screen to start the game
 $('#welcome').on('click', function(){
+  $('html').off('mousedown', playShootingFX)
   console.log("begin")
   $(this).remove()
   playerReadyWindow()
@@ -169,8 +165,8 @@ function startTimer(){
   createDuck()
   createDuck()
   $('html').on('mousedown', playShootingFX)
-  gameTimer = setInterval(goTimer, 1000);
-}
+  gameTimer = setInterval(goTimer, 1000);}
+
 function goTimer(){
   console.log("start counting")
   var $timerNumber = $('#timer').text()
@@ -280,9 +276,7 @@ function castResetBox(){
     $('#alertBox').hide()
     $('#resetBox').hide()
     playerReadyWindow()
-
   })
-
 }
 
 </script>

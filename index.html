@@ -7,48 +7,52 @@
 
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
 
     <title>Duck Hunt</title>
-    
   </head>
   <body>
 
-    <!-- SCORE BOARD -->
-      <div id="upperBar">
-        <div class="score score1">PLAYER 1:
-          <div id="player1Score">0</div>
-          </div>
-        <div id="timeSlot">TIME:
-          <div id="timer">00</div>
-        </div>
-        <div class="score score2">PLAYER 2:
-          <div id="player2Score">0</div>
-        </div>
+<!-- SCORE BOARD -->
+  <div id="upperBar">
+    <div class="score score1">PLAYER 1:
+      <div id="player1Score">0</div>
       </div>
-    <!--PLAYING FIELD -->
-      <div id="container">
-          <div id='welcome'>
-            <img id='welcomeImg'src="./images/welcome.jpg" alt="" />
-            <h2 id=welcomeText>Click Here To Begin</h2>
-          </div>
-          <div id='alertBox'>
-            <h2 id='alertLine1'></h2>
-            <h2 id='alertLine2'></h2>
-          </div>
-          <div id='resetBox'>
-            <h2>WANT TO PLAY AGAIN?</h2>
-            <button id="resetButton">RESET</button>
-          </div>
-    <!-- GRASS -->
-          <div class="grass" id="grassUpper"><img src="./images/grassUpper.png" alt="" /></div>
-          <div class="grass" id="grassLower"><img src="./images/grassLower.png" alt="" /></div>
+    <div id="timeSlot">TIME:
+      <div id="timer">00</div>
+    </div>
+    <div class="score score2">PLAYER 2:
+      <div id="player2Score">0</div>
+    </div>
+  </div>
+<!--PLAYING FIELD -->
+  <div id="container">
+<!-- WELCOME SCREEN -->
+      <div id='welcome'>
+        <img id='welcomeImg'src="./images/welcome.jpg" alt="" />
+        <h2 id=welcomeText>Click Here To Begin</h2>
       </div>
+<!-- ALERT BOX       -->
+      <div id='alertBox'>
+        <h2 id='alertLine1'></h2>
+        <h2 id='alertLine2'></h2>
+      </div>
+<!-- RESET BOX -->
+      <div id='resetBox'>
+        <h2>WANT TO PLAY AGAIN?</h2>
+        <button id="resetButton">RESET</button>
+      </div>
+<!-- GRASS -->
+      <div class="grass" id="grassUpper"><img src="./images/grassUpper.png" alt="" /></div>
+      <div class="grass" id="grassLower"><img src="./images/grassLower.png" alt="" /></div>
+  </div>
 
-    <!-- SOUNDS -->
-      <audio id="shotgun" src="audio/shotgun.mp3"></audio>
+<!-- SOUNDS -->
+  <audio id="shotgun" src="audio/shotgun.mp3"></audio>
+
+<script src=./js/app.js></script>
 
   </body>
 </html>

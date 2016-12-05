@@ -37,6 +37,7 @@
         <h2 id='alertLine1'></h2>
         <h2 id='alertLine2'></h2>
       </div>
+      <!-- <div class="cloud"><img src="./images/cloud1.png" alt="" /></div> -->
       <div id='resetBox'>
         <h2>WANT TO PLAY AGAIN?</h2>
         <button id="resetButton">RESET</button>
@@ -60,26 +61,23 @@
   $('#alertBox').hide()
   $('#resetBox').hide()
   $('.duck img').on('dragstart', function(event) { event.preventDefault(); });
-  
-//CLICK TO SHOOT FX
-    // $("body").css("background-color","white")
-    // $('body').setTimeout.css("background-color","lightblue"), 100)
+  $('.cloud img').on('dragstart', function(event) { event.preventDefault(); });
 
-  //SHOTGUN SOUND
+// SHOTGUN SOUND
   $shotgun[0].shoot = function(){
     this.pause()
     this.currentTime = 0
     this.play()
   }
 
-  //SHOTGUN SOUND
+// SHOTGUN SOUND
   function playShootingFX(){
     $shotgun[0].shoot()
     $("body").css("background-color","white")
     setTimeout(function() { $('body').css("background-color","lightblue"), 100 })
   }
 
-//RANDOM NUMBER/POSITION GENERATOR
+// RANDOM NUMBER/POSITION GENERATOR
   function genRandomNum(min, max){
     return (Math.round(Math.random() * (max - min)) + min)
   }
@@ -90,19 +88,34 @@
       return genRandomNum(5, ($(window).width() - 50))
     }
 
-//CREATE A DUCK
-//create a div with duck image within the field of play and animate
+// CREATE A DUCK
+  //create a div with duck image within the field of play and animate
 function createDuck(){
   var x = randomTop();
   var y = randomLeft();
-  $('#container').append('<div class="duck"><img src="./images/DuckUpWingR.png" alt="" /></div>')
+  var flyCode = "RU";
+  $('#container').append('<div class="duck"><img src="./images/RightFaceDuck.gif" alt="" /></div>')
   $('.duck').last().animate({ top: x, left: y }, 600, function duckAnimation() {
     newTop = randomTop();
     newLeft = randomLeft();
       if (newLeft >= y) {
-        $(this).html('<img src="./images/DuckUpWingR.png" alt="" />')
+      //  setInterval (function(){
+      //    if (flyCode == "RD"){
+            $(this).html('<img src="./images/RightFaceDuck.gif" alt="" />')
+          //  flyCode = "RU"
+        //  } else if (flyCode == "RU") {
+        //    $(this).html('<img src="./images/DuckDownWingR.png" alt="" />')
+        //    flyCode = "RD"
+        //  }}, 1000)
       } else if (newLeft < y){
-        $(this).html('<img src="./images/DuckUpWingL.png" alt="" />')
+      //  setInterval (function(){
+      //    if (flyCode == "LD"){
+            $(this).html('<img src="./images/LeftFaceDuck.gif" alt="" />')
+      //      flyCode = "LU"
+      // } else if (flyCode == "LU") {
+            $(this).html('<img src="./images/LeftFaceDuck.gif" alt="" />')
+      //      flyCode = "LD"
+      //    }}, 1000)
       }
     x = newTop
     y = newLeft
@@ -110,9 +123,8 @@ function createDuck(){
   })
   }
 
-
-//DEAD DUCK
-//change img of duck when clicked, animate to drop, increase score
+// DEAD DUCK
+  //change img of duck when clicked, animate to drop, increase score
 $('body').on('mousedown', '.duck', function(){
   $(this).stop()
   $(this).html('<img src="./images/deadduck.png" alt="" />')
@@ -123,7 +135,7 @@ $('body').on('mousedown', '.duck', function(){
   trackScore();
 })
 
-//TRACK SCORE
+// TRACK SCORE
 function trackScore(){
   if (currentPlayer == 1) {
     p1Score = p1Score + 1
@@ -135,8 +147,8 @@ function trackScore(){
 
 }
 
-//WELCOME SCREEN
-//initial game screen to start the game
+// WELCOME SCREEN
+  //initial game screen to start the game
 $('#welcome').on('click', function(){
   $('html').off('mousedown', playShootingFX)
   console.log("begin")
@@ -144,8 +156,8 @@ $('#welcome').on('click', function(){
   playerReadyWindow()
 })
 
-//FUNCTION GOROUTE
-//traffic signal to guide into proper functions
+// FUNCTION GOROUTE
+  //traffic signal to guide into proper functions
 function goRoute(){
   console.log("what to do")
   if (continueCode == "x"){
@@ -157,8 +169,8 @@ function goRoute(){
   }
 }
 
-//START CLOCK FUNCTION
-//starts main timer and initialiazes start of turn
+// START CLOCK FUNCTION
+  //starts main timer and initialiazes start of turn
 function startTimer(){
   console.log("launch timer")
   $('#timer').text('10')
@@ -168,7 +180,7 @@ function startTimer(){
   $('html').on('mousedown', playShootingFX)
   gameTimer = setInterval(goTimer, 1000);}
 
-//CLOCK FUNCTION
+// CLOCK FUNCTION
 function goTimer(){
   console.log("start counting")
   var $timerNumber = $('#timer').text()
@@ -194,7 +206,7 @@ function goTimer(){
   }
 }
 
-//SWITCH PLAYERS FUNCTION
+// SWITCH PLAYERS FUNCTION
 function switchPlayers(){
   //player 2 notification
   $('.duck').remove()
@@ -203,7 +215,7 @@ function switchPlayers(){
   playerReadyWindow()
 }
 
-//STOP FUNCTION
+// STOP FUNCTION
 function stop(){
   currentPlayer = 0
   $(".score2").css("background-color","white")
@@ -212,8 +224,8 @@ function stop(){
   WinnerMessage()
 }
 
-//PLAYER READY WINDOW FUNCTION
-//prompts player to ready and sets score window color
+// PLAYER READY WINDOW FUNCTION
+  //prompts player to ready and sets score window color
 function playerReadyWindow(){
   //greeting for current player
   if (currentPlayer == 1) {
@@ -267,7 +279,7 @@ function WinnerMessage(){
   }, 5000)
 }
 
-//RESET BUTTON
+// RESET BUTTON
 function castResetBox(){
   $('#resetBox').show()
   $("button").mouseup(function(){
@@ -281,8 +293,7 @@ function castResetBox(){
   })
 }
 
-
-//EVALUATOR
+// EVALUATOR
 function evaluator(){
   var evalScore = 0
     $('#alertLine1').text(" ROUND OVER ")
@@ -364,6 +375,33 @@ function evaluator(){
           }
       }, 5000)
     }
+
+// CREATE CLOUDS
+  // create a cloud function
+ function clouds(){
+   console.log("make a cloud")
+   //Assign it the image: cloud( 1 – 4)
+   var imageNumber = genRandomNum(1, 4)
+   //make a div
+    $('#container').append('<div class="cloud"><img src="./images/cloud' + imageNumber + '.png" alt="" /></div>')
+    //Set positions and give it an animation speed (60 - 100)
+    var cloudSetTop = genRandomNum(10, 60)
+    var $lastCloud = $('.cloud').last()
+    $lastCloud.css({top: cloudSetTop + "%"})
+	  // var setLeft = $("body").css(top: cloudSetTop"%", left: 105)
+    var animSpeed = genRandomNum(500, 800)
+    $("div.cloud").animate({ left: -25 + "%" }, (animSpeed  * 100), function() {
+    $(this).remove()
+    })
+ }
+
+
+// CAST CLOUDS
+var makeCloudRepeat = genRandomNum(5000, 10000)
+setInterval( function(){
+  clouds()}, makeCloudRepeat)
+
+
 
 </script>
 

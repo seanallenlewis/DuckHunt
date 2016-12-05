@@ -155,6 +155,11 @@
   #resetButton:hover{
     transform: scale(1.5, 1.5)
   }
+  .cloud{
+    position: fixed;
+    left: 100%;
+    z-index: -10;
+  }
   #grassUpper{
     position: fixed;
     width: 100%;

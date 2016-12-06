@@ -13,7 +13,10 @@
   $('#alertBox').hide()
   $('#resetBox').hide()
   $('body').on('dragstart', 'img', function(event) { event.preventDefault(); });
-  // $('.cloud img').on('dragstart', function(event) { event.preventDefault(); });
+
+  var playTheme = setInterval(function(){
+    $("#theme")[0].play()
+  }, 5050)
 
 // SHOTGUN SOUND
   $shotgun[0].shoot = function(){
@@ -59,7 +62,7 @@ function createDuck(){
       }
     x = newTop
     y = newLeft
-    $(this).animate({ top: x, left: y }, 1000, duckAnimation);
+    $(this).animate({ top: x, left: y }, 5000, duckAnimation);
   })
   }
 
@@ -84,7 +87,7 @@ function trackScore(){
     p2Score = p2Score + 1
     $("#player2Score").text(p2Score)
   }
-
+  announcer()
 }
 
 // WELCOME SCREEN
@@ -92,6 +95,7 @@ function trackScore(){
 $('#welcome').on('click', function(){
   $('html').off('mousedown', playShootingFX)
   console.log("begin")
+  clearInterval(playTheme)
   $(this).remove()
   playerReadyWindow()
 })
@@ -113,7 +117,7 @@ function goRoute(){
   //starts main timer and initialiazes start of player turns
 function startTimer(){
   console.log("launch timer")
-  $('#timer').text('30')
+  $('#timer').text('90')
   createDuck()
   createDuck()
   createDuck()
@@ -207,9 +211,11 @@ function playerReadyWindow(){
 function WinnerMessage(){
   console.log("winner message")
   if (p1Score > p2Score) {
+    $("#winner")[0].play()
     $('#alertLine1').text("    PLAYER 1    ")
     $('#alertLine2').text("    WINS!!!!    ")
   } else if (p1Score < p2Score) {
+    $("#winner")[0].play()
     $('#alertLine1').text("    PLAYER 2    ")
     $('#alertLine2').text("    WINS!!!!    ")
   } else if (p1Score == p2Score) {
@@ -323,6 +329,46 @@ function evaluator(){
           }
       }, 5000)
     }
+
+// ANNOUNCER
+function announcer(){
+  if (currentPlayer == 1){
+    scoreTalk = p1Score
+  } else if (currentPlayer == 2){
+    scoreTalk = p2Score
+  }
+    if (scoreTalk == 1){
+      $("#firstblood")[0].play()
+    }else if (scoreTalk == 6) {
+      $("#headshot")[0].play()
+    }else if (scoreTalk == 8){
+      $("#killingspree")[0].play()
+    }else if (scoreTalk == 10){
+      $("#rampage")[0].play()
+    }else if (scoreTalk == 12){
+      $("#extermination")[0].play()
+    }else if (scoreTalk == 13){
+      $("#dominating")[0].play()
+    }else if (scoreTalk == 14){
+      $("#bloodbath")[0].play()
+    }else if (scoreTalk == 15){
+      $("#unstoppable")[0].play()
+    }else if (scoreTalk == 16){
+      $("#annihilation")[0].play()
+    }else if (scoreTalk == 17){
+      $("#wickedsick")[0].play()
+    }else if (scoreTalk == 18){
+      $("#megakill")[0].play()
+    }else if (scoreTalk == 19){
+      $("#ultrakill")[0].play()
+    }else if (scoreTalk == 20){
+      $("#monsterkill")[0].play()
+    }else if (scoreTalk > 20 && scoreTalk < 26){
+      $("#godlike")[0].play()
+    }else if (scoreTalk > 26){
+      $("#godlike2")[0].play()
+    }
+}
 
 // CREATE CLOUDS
   // create a cloud with random placement and speed

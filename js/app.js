@@ -12,8 +12,8 @@
   $('html').off('mousedown', playShootingFX)
   $('#alertBox').hide()
   $('#resetBox').hide()
-  $('.duck img').on('dragstart', function(event) { event.preventDefault(); });
-  $('.cloud img').on('dragstart', function(event) { event.preventDefault(); });
+  $('body').on('dragstart', 'img', function(event) { event.preventDefault(); });
+  // $('.cloud img').on('dragstart', function(event) { event.preventDefault(); });
 
 // SHOTGUN SOUND
   $shotgun[0].shoot = function(){

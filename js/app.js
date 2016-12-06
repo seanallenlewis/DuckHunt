@@ -212,15 +212,15 @@ function WinnerMessage(){
   console.log("winner message")
   if (p1Score > p2Score) {
     $("#winner")[0].play()
-    $('#alertLine1').text("    PLAYER 1    ")
-    $('#alertLine2').text("    WINS!!!!    ")
+    $('#alertLine1').text("           PLAYER 1          ")
+    $('#alertLine2').text("           WINS!!!!          ")
   } else if (p1Score < p2Score) {
     $("#winner")[0].play()
-    $('#alertLine1').text("    PLAYER 2    ")
-    $('#alertLine2').text("    WINS!!!!    ")
+    $('#alertLine1').text("           PLAYER 2          ")
+    $('#alertLine2').text("           WINS!!!!          ")
   } else if (p1Score == p2Score) {
-    $('#alertLine1').text("    A TIE!!!    ")
-    $('#alertLine2').text("   TRY  AGAIN   ")
+    $('#alertLine1').text("           A TIE!!!          ")
+    $('#alertLine2').text("          TRY  AGAIN         ")
   }
   $('#alertBox').show()
   setTimeout(function(){
@@ -257,59 +257,59 @@ function evaluator(){
       evalScore = p2Score
     }
     if (evalScore == 0){
-    $('#alertLine2').text("Are You There? Hello?")
+    $('#alertLine2').text("    Are You There? Hello?     ")
     }else if (evalScore == 1){
-    $('#alertLine2').text("Have A Participation Trophy")
+    $('#alertLine2').text("  Have A Participation Trophy ")
     } else if (evalScore == 2){
-    $('#alertLine2').text("Nice Job Stevie Wonder")
+    $('#alertLine2').text("   Nice Job Stevie Wonder     ")
     }else if (evalScore == 3){
-    $('#alertLine2').text("...Storm Trooper?")
+    $('#alertLine2').text("     ...Storm Trooper?        ")
     }else if (evalScore == 4){
     $('#alertLine2').text("Practice Makes ...Average ...Eventually")
     }else if (evalScore == 5){
     $('#alertLine2').text("Don't Feel Bad. The Ducks Aren't Real")
     }else if (evalScore == 6){
-    $('#alertLine2').text("Major Mallard Murderer!")
+    $('#alertLine2').text("   Major Mallard Murderer!    ")
     }else if (evalScore == 7){
-    $('#alertLine2').text("Nice Shooting Tex!")
+    $('#alertLine2').text("     Nice Shooting Tex!       ")
     }else if (evalScore == 8){
-    $('#alertLine2').text("Wild Bill Would Be Proud")
+    $('#alertLine2').text("  Wild Bill Would Be Proud    ")
     }else if (evalScore == 9){
-    $('#alertLine2').text("Good Stuff Anne Oakley")
+    $('#alertLine2').text("    Good Stuff Anne Oakley    ")
     }else if (evalScore == 10){
-    $('#alertLine2').text("Nice Job Dirty Harry")
+    $('#alertLine2').text("     Nice Job Dirty Harry     ")
     }else if (evalScore == 11){
-    $('#alertLine2').text("Excellent Performance!!!")
+    $('#alertLine2').text("   Excellent Performance!!!   ")
     }else if (evalScore == 12){
-    $('#alertLine2').text("Certified Bad Ass!")
+    $('#alertLine2').text("      Certified Bad Ass!      ")
     }else if (evalScore == 13){
-    $('#alertLine2').text("Chief Duck Killer")
+    $('#alertLine2').text("      Chief Duck Killer       ")
     }else if (evalScore == 14){
-    $('#alertLine2').text("King Duck Killer")
+    $('#alertLine2').text("       King Duck Killer       ")
     }else if (evalScore == 15){
-    $('#alertLine2').text("We're You In Seal Team 6?")
+    $('#alertLine2').text("   We're You In Seal Team 6?  ")
     }else if (evalScore == 16){
-    $('#alertLine2').text("Certified Marksman")
+    $('#alertLine2').text("      Certified Marksman      ")
     }else if (evalScore == 17){
-    $('#alertLine2').text("Gold Level Marksman")
+    $('#alertLine2').text("      Gold Level Marksman     ")
     }else if (evalScore == 18){
-    $('#alertLine2').text("Platinum Level Marksman")
+    $('#alertLine2').text("    Platinum Level Marksman   ")
     }else if (evalScore == 19){
-    $('#alertLine2').text("Master Level Sharpshooter")
+    $('#alertLine2').text("  Master Level Sharpshooter   ")
     }else if (evalScore == 20){
     $('#alertLine2').text("Legendary Master Level Sharpshooter")
     }else if (evalScore == 21){
-    $('#alertLine2').text("God Tier Level")
+    $('#alertLine2').text("        God Tier Level        ")
     }else if (evalScore == 22){
-    $('#alertLine2').text("God Tier Level 2")
+    $('#alertLine2').text("       God Tier Level 2       ")
     }else if (evalScore == 23){
-    $('#alertLine2').text("God Tier Level 3")
+    $('#alertLine2').text("       God Tier Level 3       ")
     }else if (evalScore == 24){
-    $('#alertLine2').text("God Tier Level 4")
+    $('#alertLine2').text("       God Tier Level 4       ")
     }else if (evalScore == 25){
-    $('#alertLine2').text("God Tier Level 5")
+    $('#alertLine2').text("       God Tier Level 5       ")
     }else if (evalScore == 26){
-    $('#alertLine2').text("Double God Tier Level Gold")
+    $('#alertLine2').text("  Double God Tier Level Gold  ")
     }else if (evalScore == 27){
     $('#alertLine2').text("Triple God Tier Level Platinum")
     }else if (evalScore == 28){
@@ -317,7 +317,7 @@ function evaluator(){
     }else if (evalScore == 29){
     $('#alertLine2').text("Ultra Ultimate God Tier Level")
     }else if (evalScore >= 30){
-    $('#alertLine2').text("Infinite God Tier! You Could Make Millions in E-Sports")
+    $('#alertLine2').text("Infinite God Tier! You Win The Internet")
     }
      $('#alertBox').show()
      setTimeout(function(){

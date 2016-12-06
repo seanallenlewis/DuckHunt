@@ -76,6 +76,9 @@ Feature Wish List
 -Custom music
 -A Tie breaker based on player with least amount of shots, or a speed mode.
 -"High Score" board
+-Custom Theme Song
+-Visual effects to accompany each evaluation message
+-Grandiose finale for winner message, complete with confetti, champage bottles and Joe Esposito's hit from the Karate Kid soundtrack, "You're The Best Around."
 
 
 

@@ -62,7 +62,7 @@ function createDuck(){
       }
     x = newTop
     y = newLeft
-    $(this).animate({ top: x, left: y }, 5000, duckAnimation);
+    $(this).animate({ top: x, left: y }, 1000, duckAnimation);
   })
   }
 
@@ -117,7 +117,7 @@ function goRoute(){
   //starts main timer and initialiazes start of player turns
 function startTimer(){
   console.log("launch timer")
-  $('#timer').text('90')
+  $('#timer').text('30')
   createDuck()
   createDuck()
   createDuck()

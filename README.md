@@ -57,6 +57,17 @@ https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTUf2w53N9cP67TZdKi5OJpgu5Q
 Both layers of the image of grass were created or altered from the original:
 http://nikkinicholson.com/portfoliowork/DuckHunt/images/footer.png
 
+Sounds - 
+
+all Unreal Tournament sounds were pulled from this forum thread:
+https://forums.alliedmods.net/showthread.php?t=230836
+
+Clip from the Karate Kid soundtrack song, Joe Esposito's "You're The BEst Around" is from:
+http://users.content.ytmnd.com/a/2/9/a29b4e1b7e26449b2a78ff86fbdaa9ac.wav
+
+Duck Hunt Theme pulled from:
+http://downloads.khinsider.com/game-soundtracks/album/duck-hunt
+
 
 
 User Stories
@@ -78,7 +89,7 @@ Feature Wish List
 -"High Score" board
 -Custom Theme Song
 -Visual effects to accompany each evaluation message
--Grandiose finale for winner message, complete with confetti, champage bottles and Joe Esposito's hit from the Karate Kid soundtrack, "You're The Best Around."
+-Grandiose finale for winner message, complete with confetti, champage bottles and a disco ball.
 
 
 

@@ -214,10 +214,16 @@ function WinnerMessage(){
     $("#winner")[0].play()
     $('#alertLine1').text("           PLAYER 1          ")
     $('#alertLine2').text("           WINS!!!!          ")
+    setTimeout(function(){
+      $("#yourethebest")[0].play()
+    }, 3000)
   } else if (p1Score < p2Score) {
     $("#winner")[0].play()
     $('#alertLine1').text("           PLAYER 2          ")
     $('#alertLine2').text("           WINS!!!!          ")
+    setTimeout(function(){
+      $("#yourethebest")[0].play()
+    }, 3000)
   } else if (p1Score == p2Score) {
     $('#alertLine1').text("           A TIE!!!          ")
     $('#alertLine2').text("          TRY  AGAIN         ")
@@ -226,7 +232,7 @@ function WinnerMessage(){
   setTimeout(function(){
     $('#alertBox').hide()
     castResetBox()
-  }, 5000)
+  }, 10000)
 }
 
 // RESET BUTTON

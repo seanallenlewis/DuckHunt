@@ -18,6 +18,13 @@
     $("#theme")[0].play()
   }, 5050)
 
+//DISABLE THEME
+$("#disableTheme").on("click", function(){
+  clearInterval(playTheme)
+  $(this).remove()
+} )
+
+
 // SHOTGUN SOUND
   $shotgun[0].shoot = function(){
     this.pause()
@@ -96,6 +103,7 @@ $('#welcome').on('click', function(){
   $('html').off('mousedown', playShootingFX)
   console.log("begin")
   clearInterval(playTheme)
+  $("#disableTheme").remove()
   $(this).remove()
   playerReadyWindow()
 })
